@@ -1,14 +1,31 @@
-{% load static %}
-<html>
-	<head>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-		<title>会員登録の確認</title>
-		<link rel='stylesheet' type='text/css' href='{% static "message/css/style.css" %}' />
-	</head>
-	<body>
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <title>会員登録の確認</title>
+    </head>
+    <body>
         <div class="content">
-			<h1>以下の情報で登録しますか？</h1>
-			<h2>画面IDは「M03」です。</h2>
+			<h3>以下の情報で登録しますか？</h3>
+			<div class="form">
+            <form action="{% url 'soso:user_confirm'%}" method='POST'>
+				{% csrf_token %}
+				<table>
+					{% for field in form %}
+					<tr>
+						<th>{{ field.label }}</th>
+						<td>
+							{{ field.value }}
+							<input type="hidden" name="{{ field.name }}" value="{{ field.value }}">
+						</td>
+					</tr>
+					{% endfor %}
+				</table>				
+				<input type="submit" value="登録" /><br>
+                <a href="{% url 'soso:user_login'%}">商品検索</a>
+			</form>
+			</div>
         </div>
-	</body>
+    </body>
 </html>

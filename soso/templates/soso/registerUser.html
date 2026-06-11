@@ -1,14 +1,26 @@
-{% load static %}
-<html>
-	<head>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-		<title>会員登録</title>
-		<link rel='stylesheet' type='text/css' href='{% static "message/css/style.css" %}' />
-	</head>
-	<body>
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <title>会員登録</title>
+    </head>
+    <body>
         <div class="content">
-			<h1>会員情報を入力してください。</h1>
-			<h2>画面IDは「M02」です。</h2>
+			<h3>会員情報を入力してください。</h3>
+			<div class="form">
+				{% if error %}
+                <p style="color:red;">{{ error }}</p>
+                {% endif %}
+            <form action="{% url 'soso:user_create'%}" method='POST'>
+				{% csrf_token %}
+				<table>
+					{{form.as_table}}
+				</table>
+				<input type="submit" value="登録確認" /><br>
+                <a href="{% url 'soso:user_login'%}">商品検索</a>
+			</form>
+			</div>
         </div>
-	</body>
+    </body>
 </html>
