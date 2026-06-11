@@ -8,6 +8,9 @@
     <body>
         <div class="content">
 			<h3>ログインしてください。</h3>
+				{% if error %}
+                <p style="color:red;">{{ error }}</p>
+                {% endif %}
 			<div class="form">
             <form action="{% url 'soso:user_login'%}" method='POST'>
 				{% csrf_token %}

@@ -12,7 +12,25 @@ class UserLogin(View):
         }
         return render(request, "soso/login.html", context)
     def post(self, request):
-        pass
+        form = UserLoginForm(request.POST)
+
+        user_exists = AccountUser.objects.filter(
+            user_id=request.POST["user_id"],
+            password=request.POST["password"],
+        ).exists()
+
+        if not user_exists:
+            context = {
+                "form": form,
+                "error": "ユーザ名またはパスワードが違います",
+            }
+            return render(request, "soso/login.html", context)
+        else:
+            user_info = AccountUser.objects.get(user_id=request.POST["user_id"])
+            context = {
+                'user_info':user_info,
+            }
+            return render(request, "soso/main.html", context)
 
 
 class UserCreate(View):
@@ -65,3 +83,10 @@ class UserCreateConfirm(View):
         }
 
         return render(request, "soso/registerUserCommit.html", context)
+    
+
+class TopPage(View):
+    def get(self, request):
+        return render(request, "soso/main.html")
+    def post(self, request):
+        pass
