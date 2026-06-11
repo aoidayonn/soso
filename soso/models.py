@@ -38,7 +38,7 @@ class ShoppingItem(models.Model):
     price = models.IntegerField(verbose_name="価格")
     stock = models.IntegerField(verbose_name="在庫数")
     recommended = models.BooleanField(verbose_name="おすすめ", max_length=1, default=False)
-    category = models.ForeignKey(ShoppingCategory.category_id, verbose_name="カテゴリID", on_delete=models.CASCADE)
+    category = models.ForeignKey(ShoppingCategory, verbose_name="カテゴリID", on_delete=models.CASCADE)
 
 
 class ShoppingItemsincart(models.Model):
@@ -50,8 +50,8 @@ class ShoppingItemsincart(models.Model):
     # テーブルフィールド定義
     amount = models.IntegerField(verbose_name="数量")
     booked_date = models.DateTimeField(verbose_name="登録日")
-    item = models.ForeignKey(ShoppingItem.item_id, verbose_name="商品ID", on_delete=models.CASCADE)
-    user = models.ForeignKey(AccountUser.user_id, verbose_name="会員ID", on_delete=models.CASCADE)
+    item = models.ForeignKey(ShoppingItem, verbose_name="商品ID", on_delete=models.CASCADE)
+    user = models.ForeignKey(AccountUser, verbose_name="会員ID", on_delete=models.CASCADE)
 
 
 class ShoppingPurchase(models.Model):
@@ -65,7 +65,7 @@ class ShoppingPurchase(models.Model):
     destination = models.CharField(verbose_name="配送先", max_length=256)
     booked_date = models.DateTimeField(verbose_name="注文日", auto_now_add=True)
     cancel = models.BooleanField(verbose_name="キャンセル", max_length=1, default=False)
-    user = models.ForeignKey(AccountUser.user_id, verbose_name="注文者", on_delete=models.CASCADE)
+    user = models.ForeignKey(AccountUser, verbose_name="注文者", on_delete=models.CASCADE)
 
 
 class ShoppingPurchasedetail(models.Model):
@@ -77,8 +77,8 @@ class ShoppingPurchasedetail(models.Model):
     # テーブルフィールド定義
     purchase_detail_id = models.IntegerField(verbose_name="注文詳細ID", primary_key=True)
     amount = models.IntegerField(verbose_name="注文数")
-    item = models.ForeignKey(ShoppingItem.item_id, verbose_name="商品ID", on_delete=models.CASCADE)
-    purchase = models.ForeignKey(ShoppingPurchase.purchase_id, verbose_name="注文ID", on_delete=models.CASCADE)
+    item = models.ForeignKey(ShoppingItem, verbose_name="商品ID", on_delete=models.CASCADE)
+    purchase = models.ForeignKey(ShoppingPurchase, verbose_name="注文ID", on_delete=models.CASCADE)
 
 
 class AdministratorAdmin(models.Model):
