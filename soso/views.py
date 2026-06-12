@@ -99,6 +99,12 @@ class TopPage(View):
         pass
 
 
+class UserLogout(View):
+    def get(self, request):
+        request.session.flush()
+        return redirect('soso:user_login')
+
+
 class UserInfo(View):
     def get(self, request):
         user_id = request.session.get('user_id')
@@ -110,5 +116,6 @@ class UserInfo(View):
         })
     def post(self, request):
         pass
+
 
 
