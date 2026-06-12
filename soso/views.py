@@ -122,7 +122,17 @@ class UserInfo(View):
 
 class UserUpdate(View):
     def get(self, request):
-        form = UserUpdateForm()
+        user_id = request.session.get('user_id')
+
+        user = AccountUser.objects.get(user_id=user_id)
+
+        #formに初期値
+        form = UserUpdateForm(initial={
+            'user_id': user.user_id,
+            'name': user.name,
+            'address': user.address,
+        })
+
         context = {
             "form":form,
         }
@@ -177,3 +187,32 @@ class UserUpdateConfirm(View):
         }
 
         return render(request, "soso/updateUserCommit.html", context)
+    
+
+class UserWithdrawConfirm(View):
+    def get(self, request):
+        user_id = request.session.get('user_id')
+        user_info = AccountUser.objects.get(user_id=user_id)
+        context = {
+            'user_info':user_info
+        }
+
+        return render(request, "soso/withdrawConfirm.html", context)
+    def post(self, request):
+        pass
+
+
+class UserWithdrawCommit(View):
+    def get(self, request):
+        user_id = request.session.get('user_id')
+        request.session.flush()
+        user = AccountUser.objects.get(user_id=user_id)
+        user_name = user.name
+        user.delete()
+        context = {
+            'name':user.name
+        }
+
+        return render(request, "soso/withdrawCommit.html", context)
+    def post(self, request):
+        pass

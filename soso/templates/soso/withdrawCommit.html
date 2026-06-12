@@ -7,9 +7,10 @@
 	</head>
 	<body>
         <div class="content">
-			<h1>{"伊藤忠花子"}さん、退会処理を完了しました。</h1>
+			<h1>{{ name }}さん、退会処理を完了しました。</h1>
 			<h1>またのご利用を御待ちしております。</h1>
-			<h2>画面IDは「M10」です。</h2>
+			
+			<a href="{% url 'soso:user_login'%}">ログイン画面</a>へ
         </div>
 	</body>
 </html>

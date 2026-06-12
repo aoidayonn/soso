@@ -12,4 +12,6 @@ urlpatterns = [
     path('logout/', views.UserLogout.as_view(), name='user_logout'),
     path('updateUser/', views.UserUpdate.as_view(), name='user_update'),
     path('updateUserConfirm/', views.UserUpdateConfirm.as_view(), name='user_update_confirm'),
+    path('withdrawConfirm/', views.UserWithdrawConfirm.as_view(), name='user_withdraw_confirm'),
+    path('withdrawCommit/', views.UserWithdrawCommit.as_view(), name='user_withdraw_commit'),
 ]
