@@ -31,7 +31,7 @@
 				ようこそ{{ user_info.name }}さん<br>
 				<a href="{% url 'soso:user_info' %}">会員情報の確認</a><br>
 				<a href="{% url 'soso:user_login' %}">会員情報の変更</a><br>
-				<a href="{% url 'soso:user_login' %}">ログアウト</a><br>
+				<a href="{% url 'soso:user_logout' %}">ログアウト</a><br>
 			{% else %}
 				<a href="{% url 'soso:user_login'%}">ショッピングカートを見る</a><br><br>
 				<a href="{% url 'soso:user_login' %}">購入履歴（任意機能）</a><br><br>

@@ -99,7 +99,6 @@ class TopPage(View):
         pass
 
 
-
 class UserInfo(View):
     def get(self, request):
         user_id = request.session.get('user_id')
@@ -111,3 +110,5 @@ class UserInfo(View):
         })
     def post(self, request):
         pass
+
+
