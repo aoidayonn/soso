@@ -27,10 +27,8 @@ class UserLogin(View):
             return render(request, "soso/login.html", context)
         else:
             user_info = AccountUser.objects.get(user_id=request.POST["user_id"])
-            context = {
-                'user_info':user_info,
-            }
-            return render(request, "soso/main.html", context)
+            request.session['user_id'] = user_info.user_id
+            return redirect('soso:top_page')
 
 
 class UserCreate(View):
@@ -87,6 +85,29 @@ class UserCreateConfirm(View):
 
 class TopPage(View):
     def get(self, request):
-        return render(request, "soso/main.html")
+        user_id = request.session.get('user_id')
+
+        user_info = None
+        if user_id:
+            user_info = AccountUser.objects.get(user_id=user_id)
+
+        return render(request, "soso/main.html", {
+            'user_info': user_info
+        })
+
+    def post(self, request):
+        pass
+
+
+
+class UserInfo(View):
+    def get(self, request):
+        user_id = request.session.get('user_id')
+
+        user_info = AccountUser.objects.get(user_id=user_id)
+
+        return render(request, "soso/userInfo.html", {
+            'user_info': user_info
+        })
     def post(self, request):
         pass

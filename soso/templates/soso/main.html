@@ -7,13 +7,38 @@
 	</head>
 	<body>
         <div class="content">
-			<h1>商品の検索を行います。</h1>
+			<h3>商品の検索を行います。</h3>
+			<div class="form">
+				{% if error %}
+                <p style="color:red;">{{ error }}</p>
+                {% endif %}
+            <form action="{% url 'soso:user_login'%}" method='POST'>
+				カテゴリ:
+				<select name="category">
+					<option value="すべて">すべて</option>
+					<option value="帽子">帽子</option>
+					<option value="鞄">鞄</option>
+				</select>
+				キーワード:
+				<input type="text" name="keyword" id="keyword" placeholder="キーワードを入力">
+				<button type="submit">検索</button>
+			</form>
+
 			
 			{% if user_info %}
-				ようこそ{{ user_info.name }}さん
+				<a href="{% url 'soso:user_login'%}">ショッピングカートを見る</a><br><br>
+				<a href="{% url 'soso:user_login' %}">購入履歴（任意機能）</a><br><br>
+				ようこそ{{ user_info.name }}さん<br>
+				<a href="{% url 'soso:user_info' %}">会員情報の確認</a><br>
+				<a href="{% url 'soso:user_login' %}">会員情報の変更</a><br>
+				<a href="{% url 'soso:user_login' %}">ログアウト</a><br>
+			{% else %}
+				<a href="{% url 'soso:user_login'%}">ショッピングカートを見る</a><br><br>
+				<a href="{% url 'soso:user_login' %}">購入履歴（任意機能）</a><br><br>
+				<a href="{% url 'soso:user_login' %}">ログイン</a><br><br>
 			{% endif %}
 
-			<h2>画面IDは「S01」です。</h2>
+			<a href="{% url 'soso:user_login' %}">管理者ページ（任意機能）</a>
         </div>
 	</body>
 </html>
