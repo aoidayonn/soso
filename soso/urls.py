@@ -10,4 +10,6 @@ urlpatterns = [
     path("registerUserConfirm/", views.UserCreateConfirm.as_view(), name="user_confirm"),
     path("userInfo/", views.UserInfo.as_view(), name="user_info"),
     path('logout/', views.UserLogout.as_view(), name='user_logout'),
+    path('updateUser/', views.UserUpdate.as_view(), name='user_update'),
+    path('updateUserConfirm/', views.UserUpdateConfirm.as_view(), name='user_update_confirm'),
 ]

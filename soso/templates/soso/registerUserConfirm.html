@@ -13,6 +13,7 @@
 				{% csrf_token %}
 				<table>
 					{% for field in form %}
+					{% if field.name != "password_2" %}
 					<tr>
 						<th>{{ field.label }}</th>
 						<td>
@@ -20,7 +21,9 @@
 							<input type="hidden" name="{{ field.name }}" value="{{ field.value }}">
 						</td>
 					</tr>
-					{% endfor %}
+					{% endif %}
+				{% endfor %}
+				
 				</table>				
 				<input type="submit" value="登録" /><br>
 			</form>

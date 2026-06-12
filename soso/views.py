@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import View
 from soso.models import AccountUser
-from soso.forms import UserLoginForm, UserCreateForm
+from soso.forms import UserLoginForm, UserCreateForm, UserUpdateForm
 
 class UserLogin(View):
     def get(self, request):
@@ -54,7 +54,7 @@ class UserCreate(View):
         if user_exists:
             context = {
                 "form": form,
-                "error": "ユーザ名またはメールアドレスは既に使用されています",
+                "error": "そのユーザ名は既に使用されています",
             }
             return render(request, "soso/registerUser.html", context)
 
@@ -75,6 +75,8 @@ class UserCreateConfirm(View):
         new_user.name = request.POST["name"]
         new_user.address = request.POST["address"]
         new_user.save()
+
+        request.session['user_id'] = new_user.user_id
 
         context = {
             "name":new_user.name
@@ -118,4 +120,60 @@ class UserInfo(View):
         pass
 
 
+class UserUpdate(View):
+    def get(self, request):
+        form = UserUpdateForm()
+        context = {
+            "form":form,
+        }
+        return render(request, "soso/updateUser.html", context)
+    def post(self, request):
+        form = UserUpdateForm(request.POST)
+        if not form.is_valid():
+            context = {
+                "form":form
+            }
+            return render(request, "soso/updateUser.html", context)
+        
+        user_id = request.session.get('user_id')
 
+        user_exists = AccountUser.objects.filter(
+            user_id=request.POST["user_id"],
+        ).exclude(user_id=user_id).exists()
+
+        if user_exists:
+            context = {
+                "form": form,
+                "error": "そのユーザ名は既に使用されています",
+            }
+            return render(request, "soso/updateUser.html", context)
+
+        context = {
+            "form":form,
+            }
+        return render(request, "soso/updateUserConfirm.html", context)
+
+
+class UserUpdateConfirm(View):
+    def get(self, request):
+        pass
+    
+
+    def post(self, request):
+        user_id = request.session.get('user_id')
+        user = AccountUser.objects.get(user_id=user_id)
+
+        user.user_id = request.POST["user_id"]
+        user.password = request.POST["password_1"]
+        user.name = request.POST["name"]
+        user.address = request.POST["address"]
+        user.save()
+
+        request.session['user_id'] = user.user_id
+
+        form = UserUpdateForm(request.POST)
+        context = {
+            "form":form
+        }
+
+        return render(request, "soso/updateUserCommit.html", context)

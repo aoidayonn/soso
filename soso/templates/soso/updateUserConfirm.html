@@ -8,7 +8,26 @@
 	<body>
         <div class="content">
 			<h1>以下の会員情報で更新しますか？</h1>
-			<h2>画面IDは「M07」です。</h2>
+			<div class="form">
+				<form action="{% url 'soso:user_update_confirm'%}" method='POST'>
+					{% csrf_token %}
+					<table>
+						{% for field in form %}
+						{% if field.name != "password_2" %}
+						<tr>
+							<th>{{ field.label }}</th>
+							<td>
+								{{ field.value }}
+								<input type="hidden" name="{{ field.name }}" value="{{ field.value }}">
+							</td>
+						</tr>
+						{% endif %}
+					{% endfor %}					
+					</table>				
+					<input type="submit" value="変更" /><br>
+				</form>
+				<a href="{% url 'soso:top_page'%}">商品検索</a>へ
+				</div>
         </div>
 	</body>
 </html>

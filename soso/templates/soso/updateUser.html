@@ -8,7 +8,21 @@
 	<body>
         <div class="content">
 			<h1>会員情報</h1>
-			<h2>画面IDは「M06」です。</h2>
+			<div class="form">
+				{% if error %}
+                <p style="color:red;">{{ error }}</p>
+                {% endif %}
+            <form action="{% url 'soso:user_update'%}" method='POST'>
+				{% csrf_token %}
+				<table>
+					{{form.as_table}}
+				</table>
+				<input type="submit" value="変更" /><br>
+			</form>
+			<a href="{% url 'soso:top_page'%}">退会する</a><br><br>
+			<a href="{% url 'soso:top_page'%}">購入履歴（任意機能）</a>へ<br>
+            <a href="{% url 'soso:top_page'%}">商品検索</a>へ
+			</div>
         </div>
 	</body>
 </html>
