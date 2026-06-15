@@ -14,4 +14,7 @@ urlpatterns = [
     path('updateUserConfirm/', views.UserUpdateConfirm.as_view(), name='user_update_confirm'),
     path('withdrawConfirm/', views.UserWithdrawConfirm.as_view(), name='user_withdraw_confirm'),
     path('withdrawCommit/', views.UserWithdrawCommit.as_view(), name='user_withdraw_commit'),
+    path('searchResult/', views.SearchResult.as_view(), name='search_result'),
+    path('itemDetail/<int:item_id>/', views.itemDetail.as_view(), name='item_detail'),
+    path('cart/', views.ShoppingCart.as_view(), name='shopping_cart')
 ]

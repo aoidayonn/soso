@@ -8,7 +8,39 @@
 	<body>
         <div class="content">
 			<h1>商品の詳細表示</h1>
-			<h2>画面IDは「S03」です。</h2>
+			<table>
+				<tr>
+					<th>商品名</th>
+					<td>{{ item_info.name }}</td>
+				</tr>
+				<tr>
+					<th>商品の色</th>
+					<td>{{ item_info.color }}</td>
+				</tr>
+				<tr>
+					<th>メーカー名</th>
+					<td>{{ item_info.manufacturer }}</td>
+				</tr>
+				<tr>
+					<th>価格</th>
+					<td>{{ item_info.price }}</td>
+				</tr>
+				<tr>
+					<th>在庫数</th>
+					<td>{{ item_info.stock }}</td>
+				</tr>
+			</table>
+			<form action="{% url 'soso:shopping_cart' %}" method="POST">
+				{% csrf_token %}
+				<input type="hidden" name="item_id" value="{{ item_info.item_id }}">
+				<select name="num">
+					{% for num in numbers %}
+					<option value="{{ num }}">{{ num }}</option>
+					{% endfor %}
+				</select>
+				<button type="submit">ショッピングカートに入れる</button>
+			</form>
+			<a href="{% url 'soso:top_page'%}">商品検索</a>へ
         </div>
 	</body>
 </html>

@@ -32,7 +32,7 @@ class UserUpdateForm(forms.Form):
         super().__init__(*args, **kwargs)
         self.label_suffix = ""
 
-    user_id = forms.CharField(label="会員ID:", max_length=128)
+    user_id = forms.CharField(label="会員ID:", max_length=128, disabled=True)
     password_1 = forms.CharField(label="パスワード:", max_length=256)
     password_2= forms.CharField(label="パスワード(確認):", max_length=256)
     name = forms.CharField(label="お名前:", max_length=128)

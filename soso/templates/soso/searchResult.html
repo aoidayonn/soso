@@ -7,8 +7,30 @@
 	</head>
 	<body>
         <div class="content">
-			<h1>キーワード{"麦わら帽子"}カテゴリ{"帽子"}の検索結果</h1>
-			<h2>画面IDは「S02」です。</h2>
+			<h1>キーワード "{{ keyword }}" カテゴリ "{{ category }}" の検索結果</h1>
+			
+			<table>
+				<tr>
+					<th>商品名</th>
+					<th>商品の色</th>
+					<th>メーカ名</th>
+					<th>価格</th>
+				</tr>
+				
+				{% for item in products %}
+				<tr>
+					<td>
+					<a href="{% url 'soso:item_detail' item.item_id %}">{{ item.name }}</a>
+					</td>
+					<td>{{ item.color }}</td>
+					<td>{{ item.manufacturer }}</td>
+					<td>{{ item.price }}</td>
+				</tr>
+				{% endfor %}
+
+			</table>
+
+			<a href="{% url 'soso:top_page'%}">商品検索</a>へ
         </div>
 	</body>
 </html>

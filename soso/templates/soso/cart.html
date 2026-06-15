@@ -8,7 +8,28 @@
 	<body>
         <div class="content">
 			<h1>ショッピングカート内の商品一覧</h1>
-			<h2>画面IDは「S04」です。</h2>
-        </div>
+				
+				<table>
+					<tr>
+						<th>商品名</th>
+						<th>商品の色</th>
+						<th>メーカ名</th>
+						<th>単価</th>
+						<th>数量</th>
+					</tr>
+					
+
+					{% for cart in cart_items %}
+					<tr>
+					<td>{{ cart.item.name }}</td>
+					<td>{{ cart.item.color }}</td>
+					<td>{{ cart.item.manufacturer }}</td>
+					<td>{{ cart.item.price }}</td>
+					<td>{{ cart.amount }}</td>
+					</tr>
+					{% endfor %}
+				</table>
+				<a href="{% url 'soso:top_page'%}">商品検索</a>へ
+			</div>
 	</body>
 </html>
