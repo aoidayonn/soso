@@ -4,6 +4,17 @@ from . import views
 app_name = "soso"
 
 urlpatterns = [
-    path("", views.IndexView.as_view()),
-    path("top/", views.IndexView.as_view(), name="top_page"),
+    path("main/", views.TopPage.as_view(), name="top_page"),
+    path("login/", views.UserLogin.as_view(), name="user_login"),
+    path("registerUser/", views.UserCreate.as_view(), name="user_create"),
+    path("registerUserConfirm/", views.UserCreateConfirm.as_view(), name="user_confirm"),
+    path("userInfo/", views.UserInfo.as_view(), name="user_info"),
+    path("logout/", views.UserLogout.as_view(), name="user_logout"),
+    path("updateUser/", views.UserUpdate.as_view(), name="user_update"),
+    path("updateUserConfirm/", views.UserUpdateConfirm.as_view(), name="user_update_confirm"),
+    path("withdrawConfirm/", views.UserWithdrawConfirm.as_view(), name="user_withdraw_confirm"),
+    path("withdrawCommit/", views.UserWithdrawCommit.as_view(), name="user_withdraw_commit"),
+    path("searchResult/", views.SearchResult.as_view(), name="search_result"),
+    path("itemDetail/<int:item_id>/", views.ItemDetail.as_view(), name="item_detail"),
+    path("cart/", views.ShoppingCart.as_view(), name="shopping_cart"),
 ]

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>検索結果</title>
+</head>
+<body>
+    <div class="content">
+        <h3>検索結果</h3>
+
+        {% if products %}
+        <table border="1">
+            <tr>
+                <th>商品名</th>
+                <th>色</th>
+                <th>メーカー</th>
+                <th>価格</th>
+            </tr>
+            {% for product in products %}
+            <tr>
+                <td>
+                    <a href="{% url 'soso:item_detail' product.item_id %}">
+                        {{ product.name }}
+                    </a>
+                </td>
+                <td>{{ product.color }}</td>
+                <td>{{ product.manufacturer }}</td>
+                <td>{{ product.price }}円</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>該当する商品が見つかりませんでした。</p>
+        {% endif %}
+
+        <br>
+        <a href="{% url 'soso:top_page' %}">商品検索に戻る</a>
+    </div>
+</body>
+</html>

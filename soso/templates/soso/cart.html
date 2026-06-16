@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>ショッピングカート</title>
+</head>
+<body>
+    <div class="content">
+        <h3>ショッピングカート</h3>
+
+        {% if cart_items %}
+        <table border="1">
+            <tr>
+                <th>商品名</th>
+                <th>色</th>
+                <th>メーカー</th>
+                <th>単価</th>
+                <th>数量</th>
+            </tr>
+            {% for cart_item in cart_items %}
+            <tr>
+                <td>{{ cart_item.item.name }}</td>
+                <td>{{ cart_item.item.color }}</td>
+                <td>{{ cart_item.item.manufacturer }}</td>
+                <td>{{ cart_item.item.price }}円</td>
+                <td>{{ cart_item.amount }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <br>
+        <p><strong>合計 {{ total }}円</strong></p>
+
+        {% else %}
+        <p>カートに商品がありません。</p>
+        {% endif %}
+
+        <br>
+        <a href="{% url 'soso:top_page' %}">商品検索に戻る</a>
+    </div>
+</body>
+</html>

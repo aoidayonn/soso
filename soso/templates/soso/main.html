@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>商品検索</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'message/css/style.css' %}" />
+</head>
+<body>
+    <div class="content">
+        <h1>商品を検索してくれ！！！！！</h1>
+
+        <div class="form">
+            <!-- ★ style="display:inline" で横並び -->
+            <form action="{% url 'soso:search_result' %}" method="GET" style="display:flex; align-items:center; gap:10px;">
+                {{ form.category.label }}
+                {{ form.category }}
+                {{ form.keyword.label }}
+                {{ form.keyword }}
+                <button type="submit">検索</button>
+            </form>
+        </div>
+
+        <br>
+            <a href="{% url 'soso:shopping_cart' %}">ショッピングカートを見る</a><br><br>
+
+		{% if user_info %}
+            ようこそ{{ user_info.name }}さん<br>
+            <a href="{% url 'soso:user_info' %}">会員情報の確認</a><br>
+            <a href="{% url 'soso:user_update' %}">会員情報の変更</a><br>
+            <a href="{% url 'soso:user_logout' %}">ログアウト</a><br>
+        {% else %}
+            <a href="{% url 'soso:user_login' %}">ログイン</a><br><br>
+        {% endif %}
+    </div>
+</body>
+</html>

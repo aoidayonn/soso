@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>会員情報</title>
+</head>
+<body>
+    <div class="content">
+        <h3>会員情報</h3>
+
+        <table border="1">
+            <tr><th>会員ID</th><td>{{ user_info.user_id }}</td></tr>
+            <tr><th>パスワード</th><td>表示なし</td></tr>
+            <tr><th>お名前</th><td>{{ user_info.name }}</td></tr>
+            <tr><th>ご住所</th><td>{{ user_info.address }}</td></tr>
+        </table>
+
+        <br>
+        <a href="{% url 'soso:user_update' %}">会員情報の変更</a><br>
+        <a href="{% url 'soso:top_page' %}">商品検索に戻る</a>
+    </div>
+</body>
+</html>
