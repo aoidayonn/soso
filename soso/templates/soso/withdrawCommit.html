@@ -1,16 +1,14 @@
-{% load static %}
-<html>
-	<head>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-		<title>退会完了</title>
-		<link rel='stylesheet' type='text/css' href='{% static "message/css/style.css" %}' />
-	</head>
-	<body>
-        <div class="content">
-			<h1>{{ name }}さん、退会処理を完了しました。</h1>
-			<h1>またのご利用を御待ちしております。</h1>
-			
-			<a href="{% url 'soso:user_login'%}">ログイン画面</a>へ
-        </div>
-	</body>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>退会完了</title>
+</head>
+<body>
+    <div class="content">
+        <h3>退会が完了しました。</h3>
+        <p>{{ name }}さん、ご利用ありがとうございました。</p>
+        <a href="{% url 'soso:user_login' %}">ログイン画面へ</a>
+    </div>
+</body>
 </html>

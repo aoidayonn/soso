@@ -1,35 +1,22 @@
-{% load static %}
-<html>
-	<head>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-		<title>会員情報の更新完了</title>
-		<link rel='stylesheet' type='text/css' href='{% static "message/css/style.css" %}' />
-	</head>
-	<body>
-        <div class="content">
-			<h1>以下の会員情報で更新しました。</h1>
-			<form action="{% url 'soso:user_update_confirm'%}" method='POST'>
-				{% csrf_token %}
-				<table>
-					{% for field in form %}
-					{% if field.name != "password_2" %}
-					<tr>
-						<th>{{ field.label }}</th>
-						<td>
-							{% if field.name == "password_1" %}
-								表示なし
-								<input type="hidden" name="{{ field.name }}" value="{{ field.value }}">
-							{% else %}
-								{{ field.value }}
-								<input type="hidden" name="{{ field.name }}" value="{{ field.value }}">
-							{% endif %}
-						</td>
-					</tr>
-					{% endif %}
-				{% endfor %}					
-				</table>
-			</form>
-			<a href="{% url 'soso:top_page'%}">商品検索</a>へ
-        </div>
-	</body>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>会員情報変更完了</title>
+</head>
+<body>
+    <div class="content">
+        <h3>会員情報の変更が完了しました。</h3>
+
+        <table border="1">
+            <tr><th>会員ID</th><td>{{ user_info.user_id }}</td></tr>
+            <tr><th>パスワード</th><td>表示なし</td></tr>
+            <tr><th>お名前</th><td>{{ user_info.name }}</td></tr>
+            <tr><th>ご住所</th><td>{{ user_info.address }}</td></tr>
+        </table>
+
+        <br>
+        <a href="{% url 'soso:top_page' %}">商品検索に戻る</a>
+    </div>
+</body>
 </html>

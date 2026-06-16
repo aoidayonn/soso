@@ -1,14 +1,15 @@
-{% load static %}
-<html>
-	<head>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-		<title>会員登録の完了</title>
-		<link rel='stylesheet' type='text/css' href='{% static "message/css/style.css" %}' />
-	</head>
-	<body>
-        <div class="content">
-			<h1>{{ name }}さんの会員登録が完了しました。</h1><br><br>
-			<a href="{% url 'soso:top_page'%}">商品検索</a>へ
-        </div>
-	</body>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>会員登録完了</title>
+</head>
+<body>
+    <div class="content">
+        <h3>{{ user_info.name }}さんの会員登録が完了しました。</h3>
+
+        <br>
+        <a href="{% url 'soso:top_page' %}">商品検索に戻る</a>
+    </div>
+</body>
 </html>

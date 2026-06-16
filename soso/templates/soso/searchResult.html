@@ -1,36 +1,40 @@
-{% load static %}
-<html>
-	<head>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-		<title>検索結果</title>
-		<link rel='stylesheet' type='text/css' href='{% static "message/css/style.css" %}' />
-	</head>
-	<body>
-        <div class="content">
-			<h1>キーワード "{{ keyword }}" カテゴリ "{{ category }}" の検索結果</h1>
-			
-			<table>
-				<tr>
-					<th>商品名</th>
-					<th>商品の色</th>
-					<th>メーカ名</th>
-					<th>価格</th>
-				</tr>
-				
-				{% for item in products %}
-				<tr>
-					<td>
-					<a href="{% url 'soso:item_detail' item.item_id %}">{{ item.name }}</a>
-					</td>
-					<td>{{ item.color }}</td>
-					<td>{{ item.manufacturer }}</td>
-					<td>{{ item.price }}</td>
-				</tr>
-				{% endfor %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>検索結果</title>
+</head>
+<body>
+    <div class="content">
+        <h3>検索結果</h3>
 
-			</table>
+        {% if products %}
+        <table border="1">
+            <tr>
+                <th>商品名</th>
+                <th>色</th>
+                <th>メーカー</th>
+                <th>価格</th>
+            </tr>
+            {% for product in products %}
+            <tr>
+                <td>
+                    <a href="{% url 'soso:item_detail' product.item_id %}">
+                        {{ product.name }}
+                    </a>
+                </td>
+                <td>{{ product.color }}</td>
+                <td>{{ product.manufacturer }}</td>
+                <td>{{ product.price }}円</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>該当する商品が見つかりませんでした。</p>
+        {% endif %}
 
-			<a href="{% url 'soso:top_page'%}">商品検索</a>へ
-        </div>
-	</body>
+        <br>
+        <a href="{% url 'soso:top_page' %}">商品検索に戻る</a>
+    </div>
+</body>
 </html>

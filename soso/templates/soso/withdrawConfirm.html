@@ -1,17 +1,20 @@
-{% load static %}
-<html>
-	<head>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-		<title>退会確認</title>
-		<link rel='stylesheet' type='text/css' href='{% static "message/css/style.css" %}' />
-	</head>
-	<body>
-        <div class="content">
-			<h1>{{ user_info.name }}さん、本当に退会しますか？</h1>
-			<form action="{% url 'soso:user_withdraw_commit'%}" method="POST">
-				<button>退会</button>
-			</form>
-			<a href="{% url 'soso:top_page'%}">商品検索</a>へ
-        </div>
-	</body>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>退会確認</title>
+</head>
+<body>
+    <div class="content">
+        <h3>{{ user_info.name }}さん、本当に退会しますか？</h3>
+
+        <form action="{% url 'soso:user_withdraw_commit' %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="退会する" />
+        </form>
+
+        <br>
+        <a href="{% url 'soso:top_page' %}">商品検索</a>へ
+    </div>
+</body>
 </html>

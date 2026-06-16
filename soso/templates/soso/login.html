@@ -1,26 +1,30 @@
 <!DOCTYPE html>
-
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8" />
-        <title>会員ログイン画面</title>
-    </head>
-    <body>
-        <div class="content">
-			<h3>ログインしてください。</h3>
-				{% if error %}
-                <p style="color:red;">{{ error }}</p>
-                {% endif %}
-			<div class="form">
-            <form action="{% url 'soso:user_login'%}" method='POST'>
-				{% csrf_token %}
-				<table>
-					{{form.as_table}}
-				</table>
-				<input type="submit" value="ログイン" /><br>
-                <a href="{% url 'soso:user_create'%}">会員登録</a>
-			</form>
-			</div>
+<head>
+    <meta charset="UTF-8" />
+    <title>会員ログイン画面</title>
+</head>
+<body>
+    <div class="content">
+        <h3>ログインしてください。</h3>
+
+        {% if error %}
+        <p style="color:red;">{{ error }}</p>
+        {% endif %}
+
+        <div class="form">
+            <form action="{% url 'soso:user_login' %}" method="POST">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_table }}
+                </table>
+                <input type="submit" value="ログイン" /><br>
+                <a href="{% url 'soso:user_create' %}">会員登録</a>
+            </form>
         </div>
-    </body>
+
+        <br>
+        <a href="{% url 'soso:top_page' %}">トップページへ</a>
+    </div>
+</body>
 </html>

@@ -1,33 +1,35 @@
-{% load static %}
-<html>
-	<head>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-		<title>会員情報の更新</title>
-		<link rel='stylesheet' type='text/css' href='{% static "message/css/style.css" %}' />
-	</head>
-	<body>
-        <div class="content">
-			<h1>以下の会員情報で更新しますか？</h1>
-			<div class="form">
-				<form action="{% url 'soso:user_update_confirm'%}" method='POST'>
-					{% csrf_token %}
-					<table>
-						{% for field in form %}
-						{% if field.name != "password_2" %}
-						<tr>
-							<th>{{ field.label }}</th>
-							<td>
-								{{ field.value }}
-								<input type="hidden" name="{{ field.name }}" value="{{ field.value }}">
-							</td>
-						</tr>
-						{% endif %}
-					{% endfor %}					
-					</table>				
-					<input type="submit" value="変更" /><br>
-				</form>
-				<a href="{% url 'soso:top_page'%}">商品検索</a>へ
-				</div>
-        </div>
-	</body>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>会員情報変更確認</title>
+</head>
+<body>
+    <div class="content">
+        <h3>以下の内容に変更します。よろしいですか？</h3>
+
+        <table border="1">
+            <tr><th>会員ID</th><td>{{ form.cleaned_data.user_id }}</td></tr>
+            <tr>
+                <th>パスワード</th>
+                <td>
+                    <input type="password" value="{{ form.cleaned_data.password_1 }}" readonly>
+                </td>
+            </tr>
+            <tr><th>お名前</th><td>{{ form.cleaned_data.name }}</td></tr>
+            <tr><th>ご住所</th><td>{{ form.cleaned_data.address }}</td></tr>
+        </table>
+
+        <form action="{% url 'soso:user_update_confirm' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="password_1" value="{{ form.cleaned_data.password_1 }}">
+            <input type="hidden" name="name" value="{{ form.cleaned_data.name }}">
+            <input type="hidden" name="address" value="{{ form.cleaned_data.address }}">
+            <button type="submit">変更</button>
+        </form>
+
+        <br>
+        <a href="{% url 'soso:top_page' %}">商品検索に戻る</a>
+    </div>
+</body>
 </html>
