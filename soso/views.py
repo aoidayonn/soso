@@ -7,7 +7,7 @@ from soso.forms import UserLoginForm, UserCreateForm, UserUpdateForm, SearchForm
 
 
 # ──────────────────────────────────────
-# ヘルパー：ログイン中のユーザーを取得
+# ログイン中のユーザーを取得
 # ──────────────────────────────────────
 def get_login_user(request):
     user_id = request.session.get("user_id")
